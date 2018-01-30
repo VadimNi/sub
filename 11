@@ -1,0 +1,12 @@
+ * Restarting nginx nginx
+   ...done.
+ * Starting MySQL database server mysqld
+   ...done.
+Migrations for 'qa':
+  qa/migrations/0001_initial.py:
+    - Create model Answer
+    - Create model Question
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, qa, sessions
+Running migrations:
+  No migrations to apply.

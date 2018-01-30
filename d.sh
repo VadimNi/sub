@@ -1,11 +1,10 @@
-apt-get update && apt-get install -y mc curl 
-#python3-pip git mysql-server mysql-client &&
+sudo apt-get update && apt-get install -y mc curl &&
 #apt-get install -y python3-dev libmysqlclient-dev && 
 #pip3 install django==1.10.5 &&
 #pip3 install gunicorn==19.6.0 &&
 #pip3 install mysqlclient &&
-rm /etc/nginx/sites-available/default && 
-ln -sf /home/box/web/etc/nginx.conf /etc/nginx/sites-available/default &&
+sudo rm /etc/nginx/sites-available/default && 
+sudo ln -sf /home/box/web/etc/nginx.conf /etc/nginx/sites-available/default &&
 sudo /etc/init.d/nginx restart &&
 sudo /etc/init.d/mysql start &&
 mysql -uroot -e "CREATE DATABASE IF NOT EXISTS my_db CHARACTER SET utf8;" &&
@@ -29,5 +28,6 @@ ln -sf /home/box/web/urls.py /home/box/web/ask/qa/urls.py &&
 
 ln -sf /home/box/web/my.cnf /home/box/web/ask/my.cnf &&
 
-python3 ./manage.py makemigrations qa
-gunicorn --log-file error.log --access-logfile acc.log --log-level debug -b 0.0.0.0:8000  -w 4 -D ask.wsgi
+python3 ./manage.py makemigrations && 
+python3 ./manage.py migrate &&
+gunicorn --log-file error.log --access-logfile acc.log --log-level debug -b 0.0.0.0:8000  -D ask.wsgi

@@ -2,8 +2,14 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+class QuestionManager(models.Manager):
+    def new(self):
+        return self.order_by('-added_at')
+    def popular(self):
+        return self.order_by('-rating')
+
 class Question(models.Model):
-#    object = QuestionManager()
+    objects = QuestionManager()
     title = models.CharField(default='', max_length = 1024)
     text = models.TextField(default='')
     added_at = models.DateField(blank=True, auto_now_add=True)
@@ -19,14 +25,9 @@ class Question(models.Model):
 
 class Answer(models.Model):
     text = models.TextField(default='')
-    added_at = models.DateField(null=True)
+    added_at = models.DateField(null=True, auto_now_add=True)
     question = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.text
 
-class QuestionManager(models.Manager):
-    def new():
-        return self.order_by('-added_at')
-    def popular():
-        return self.order_by('-rating')

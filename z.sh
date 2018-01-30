@@ -1,0 +1,1 @@
+docker run -p 80:8000/tcp --rm -it -v /home/user/temp/rub:/home/box/web ubuntu:14.04
