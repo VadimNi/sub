@@ -8,7 +8,7 @@ ln -sf /home/box/web/etc/nginx.conf /etc/nginx/sites-available/default &&
 /etc/init.d/nginx restart &&
 /etc/init.d/mysql start &&
 mysql -uroot -e "CREATE DATABASE IF NOT EXISTS my_db CHARACTER SET utf8;" &&
-#mysql -uroot -e "create user 'user'@'localhost' identified by '12345';" &&
+mysql -uroot -e "create user 'user'@'localhost' identified by '12345';" &&
 mysql -uroot -e "GRANT ALL PRIVILEGES ON * . * TO 'user'@'localhost';" &&
 cd /home/box/web &&
 #gunicorn --log-file error_log.log --access-logfile acclog -b 0.0.0.0:8080 -w 4 -D hello:app 
@@ -29,5 +29,5 @@ ln -sf /home/box/web/urls.py /home/box/web/ask/qa/urls.py &&
 ln -sf /home/box/web/my.cnf /home/box/web/ask/my.cnf &&
 
 python3 ./manage.py makemigrations && #qa &&
-python3 ./manage.py migrate #&&
-#gunicorn --log-file error.log --access-logfile acc.log --log-level debug -b 0.0.0.0:8000  -D ask.wsgi
+python3 ./manage.py migrate &&
+gunicorn --log-file error.log --access-logfile acc.log --log-level debug -b 0.0.0.0:8000  -D ask.wsgi

@@ -8,7 +8,7 @@ sudo ln -sf /home/box/web/etc/nginx.conf /etc/nginx/sites-available/default &&
 sudo /etc/init.d/nginx restart &&
 sudo /etc/init.d/mysql start &&
 mysql -uroot -e "CREATE DATABASE IF NOT EXISTS my_db CHARACTER SET utf8;" &&
-mysql -uroot -e "create user 'user'@'localhost' identified by '12345';" &&
+mysql -uroot -e "create user 'user@localhost' identified by '12345';" &&
 mysql -uroot -e "GRANT ALL PRIVILEGES ON * . * TO 'user'@'localhost';" &&
 cd /home/box/web &&
 #gunicorn --log-file error_log.log --access-logfile acclog -b 0.0.0.0:8080 -w 4 -D hello:app 
