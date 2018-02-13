@@ -3,6 +3,7 @@
 #pip3 install django==1.10.5 &&
 #pip3 install gunicorn==19.6.0 &&
 #pip3 install mysqlclient &&
+pip3 install django-autofixture &&
 rm /etc/nginx/sites-available/default && 
 ln -sf /home/box/web/etc/nginx.conf /etc/nginx/sites-available/default &&
 /etc/init.d/nginx restart &&
@@ -26,9 +27,11 @@ ln -sf /home/box/web/urls.py /home/box/web/ask/qa/urls.py &&
 rm /home/box/web/ask/ask/urls.py &&
 ln -sf /home/box/web/urls1.py /home/box/web/ask/ask/urls.py &&
 ln -sf /home/box/web/urls.py /home/box/web/ask/qa/urls.py &&
+ln -sf /home/box/web/forms.py /home/box/web/ask/qa/forms.py &&
+ln -sf /home/box/web/templates /home/box/web/ask/qa/templates &&
 
 ln -sf /home/box/web/my.cnf /home/box/web/ask/my.cnf &&
 
-python3 ./manage.py makemigrations && #qa &&
-python3 ./manage.py migrate &&
-gunicorn --log-file error.log --access-logfile acc.log --log-level debug -b 0.0.0.0:8000  -D ask.wsgi
+python3 ./manage.py makemigrations && 
+python3 ./manage.py migrate #&&
+#gunicorn --log-file error.log --access-logfile acc.log --log-level debug -b 0.0.0.0:8000  -D ask.wsgi
